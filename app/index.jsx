@@ -1,7 +1,7 @@
 import { View, Text, Image, ScrollView } from "react-native";
 import { Stack } from "expo-router";
 import { StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import { images } from "../constants";
@@ -11,7 +11,7 @@ const Welcome = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
-        <View className="w-full justify-center  items-center px-4">
+        <View className="w-full justify-center h-full items-center px-4">
           <Image
             source={images.logo}
             className="w-[148px] h-[84px]"
@@ -37,7 +37,11 @@ const Welcome = () => {
             where creativity meets innovation : embark on a journey of limitless
             exploration with Aora
           </Text>
-          <CustomBtn />
+          <CustomBtn
+            title="Continue with email"
+            handlepress={() => router.push("/sign-in")}
+            containerStyles="w-full mt-7"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
