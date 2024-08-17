@@ -6,10 +6,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import FormField from "../../components/FormField";
 import CustomBtn from "../../components/CustomBtn";
-
+import { useGlobalContext } from "../../context/GlobalProvider";
 import { createUser } from "../../lib/appwrite";
 
 const SignUp = () => {
+  const { setUser, setIsLogged } = useGlobalContext();
+
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -23,7 +25,8 @@ const SignUp = () => {
 
     try {
       const res = await createUser(form.email, form.password, form.email);
-      router.replace("/home");
+      setUser(res);
+      setIsLogged(true);
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
